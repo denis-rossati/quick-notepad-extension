@@ -1,19 +1,22 @@
 const submitButton = document.getElementById('save-button');
+const deleteButton = document.getElementById('remove-note');
 
-const minifyTitle = (string) => `${string.split('').slice(0, 10).join('')}...`;
+const reduceTitle = (string) => `${string.split('').slice(0, 10).join('')}...`;
 
 const updateNoteListButtons = () => {
   const arrayNotes = JSON.parse(localStorage.getItem('quickNotePad'));
   const notesList = document.getElementById('notes-list');
   notesList.innerHTML = '';
   arrayNotes.forEach(({ titleContent }) => {
-    const minifiedTitle = minifyTitle(titleContent);
+    const reducedTitle = reduceTitle(titleContent);
     const button = document.createElement('button');
-    button.innerText = minifiedTitle;
+    button.innerText = reducedTitle;
     button.id = titleContent;
     notesList.appendChild(button);
   });
 };
+
+/*  \/ to add a note */
 
 const addNoteToLocalStorage = (note) => {
   if (!localStorage.getItem('quickNotePad')) {
@@ -38,7 +41,19 @@ const createNoteObject = (evt) => {
   updateNoteListButtons();
 };
 
+/* \/ to remove note */
+
+const removeNote = () => {
+  const oldLocalStorageArray = JSON.parse(localStorage.getItem('quickNotePad'));
+  const titleOfNote = document.getElementById('title-field').value;
+  const newNotes = oldLocalStorageArray.filter(({ titleContent }) => titleContent !== titleOfNote);
+  localStorage.removeItem('quickNotePad');
+  localStorage.setItem('quickNotePad', JSON.stringify(newNotes));
+  updateNoteListButtons();
+};
+
 window.onload = () => {
-  submitButton.addEventListener('click', addNote);
+  submitButton.addEventListener('click', createNoteObject);
+  deleteButton.addEventListener('click', removeNote);
   updateNoteListButtons();
 };
