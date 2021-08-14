@@ -2,9 +2,10 @@ const submitButton = document.getElementById('save-button');
 
 const minifyTitle = (string) => `${string.split('').slice(0, 10).join('')}...`;
 
-const createNoteListButtons = () => {
+const updateNoteListButtons = () => {
   const arrayNotes = JSON.parse(localStorage.getItem('quickNotePad'));
   const notesList = document.getElementById('notes-list');
+  notesList.innerHTML = '';
   arrayNotes.forEach(({ titleContent }) => {
     const minifiedTitle = minifyTitle(titleContent);
     const button = document.createElement('button');
@@ -14,7 +15,7 @@ const createNoteListButtons = () => {
   });
 };
 
-const localStorageHandler = (note) => {
+const addNoteToLocalStorage = (note) => {
   if (!localStorage.getItem('quickNotePad')) {
     const newLocalStorageArray = [note];
     localStorage.setItem('quickNotePad', JSON.stringify(newLocalStorageArray));
@@ -25,7 +26,7 @@ const localStorageHandler = (note) => {
   }
 };
 
-const addNote = (evt) => {
+const createNoteObject = (evt) => {
   evt.preventDefault();
   const titleContent = document.getElementById('title-field').value;
   const noteContent = document.getElementById('notes-input').value;
@@ -33,11 +34,11 @@ const addNote = (evt) => {
     titleContent,
     noteContent,
   };
-  localStorageHandler(noteInfo);
-  createNoteListButtons();
+  addNoteToLocalStorage(noteInfo);
+  updateNoteListButtons();
 };
 
 window.onload = () => {
   submitButton.addEventListener('click', addNote);
-  createNoteListButtons();
+  updateNoteListButtons();
 };
