@@ -1,16 +1,16 @@
 const submitButton = document.getElementById('save-button');
 
-const minifyTitle = (string) => string.split('').slice(10).join('') + '...';
+const minifyTitle = (string) => `${string.split('').slice(0, 10).join('')}...`;
 
 const createNoteListButtons = () => {
   const arrayNotes = JSON.parse(localStorage.getItem('quickNotePad'));
-  const 
+  const notesList = document.getElementById('notes-list');
   arrayNotes.forEach(({ titleContent }) => {
     const minifiedTitle = minifyTitle(titleContent);
     const button = document.createElement('button');
     button.innerText = minifiedTitle;
     button.id = titleContent;
-
+    notesList.appendChild(button);
   });
 };
 
@@ -34,8 +34,10 @@ const addNote = (evt) => {
     noteContent,
   };
   localStorageHandler(noteInfo);
+  createNoteListButtons();
 };
 
 window.onload = () => {
   submitButton.addEventListener('click', addNote);
+  createNoteListButtons();
 };
