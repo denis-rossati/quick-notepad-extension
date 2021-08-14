@@ -18,7 +18,7 @@ const updateNoteListButtons = () => {
 
 /*  \/ to add a note */
 
-const addNoteToLocalStorage = (note) => {
+const setNoteInLocalStorage = (note) => {
   if (!localStorage.getItem('quickNotePad')) {
     const newLocalStorageArray = [note];
     localStorage.setItem('quickNotePad', JSON.stringify(newLocalStorageArray));
@@ -29,7 +29,7 @@ const addNoteToLocalStorage = (note) => {
   }
 };
 
-const createNoteObject = (evt) => {
+const manageNote = (evt) => {
   evt.preventDefault();
   const titleContent = document.getElementById('title-field').value;
   const noteContent = document.getElementById('notes-input').value;
@@ -37,7 +37,7 @@ const createNoteObject = (evt) => {
     titleContent,
     noteContent,
   };
-  addNoteToLocalStorage(noteInfo);
+  setNoteInLocalStorage(noteInfo);
   updateNoteListButtons();
 };
 
@@ -53,7 +53,7 @@ const removeNote = () => {
 };
 
 window.onload = () => {
-  submitButton.addEventListener('click', createNoteObject);
+  submitButton.addEventListener('click', manageNote);
   deleteButton.addEventListener('click', removeNote);
   updateNoteListButtons();
 };
