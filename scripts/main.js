@@ -16,16 +16,38 @@ const updateNoteListButtons = () => {
   });
 };
 
-/*  \/ to add a note */
+/* to update a note */
+
+const shouldUpdate = (title) => JSON.parse(localStorage.getItem('quickNotePad')).some(({ titleContent }) => titleContent === title);
+
+const updateNoteContent = ({ titleContent: title, noteContent: content }) => {
+  const oldLocalStorageArray = JSON.parse(localStorage.getItem('quickNotePad'));
+  const updatedArray = oldLocalStorageArray.map((el) => {
+    if (el.titleContent === title) {
+      return {
+        titleContent: title,
+        noteContent: content,
+      };
+    }
+    return el;
+  });
+  localStorage.setItem('quickNotePad', JSON.stringify(updatedArray));
+};
+
+/* to add a note */
+
+const manageLocalStorageNotes = (note) => {
+  const oldLocalStorageArray = JSON.parse(localStorage.getItem('quickNotePad'));
+  const newLocalStorageArray = [...oldLocalStorageArray, note];
+  localStorage.setItem('quickNotePad', JSON.stringify(newLocalStorageArray));
+};
 
 const setNoteInLocalStorage = (note) => {
   if (!localStorage.getItem('quickNotePad')) {
     const newLocalStorageArray = [note];
     localStorage.setItem('quickNotePad', JSON.stringify(newLocalStorageArray));
   } else {
-    const oldLocalStorageArray = JSON.parse(localStorage.getItem('quickNotePad'));
-    const newLocalStorageArray = [...oldLocalStorageArray, note];
-    localStorage.setItem('quickNotePad', JSON.stringify(newLocalStorageArray));
+    manageLocalStorageNotes(note);
   }
 };
 
@@ -37,17 +59,20 @@ const manageNote = (evt) => {
     titleContent,
     noteContent,
   };
-  setNoteInLocalStorage(noteInfo);
+  if (shouldUpdate(titleContent)) {
+    updateNoteContent(noteInfo);
+  } else {
+    setNoteInLocalStorage(noteInfo);
+  }
   updateNoteListButtons();
 };
 
-/* \/ to remove note */
+/* to remove note */
 
 const removeNote = () => {
   const oldLocalStorageArray = JSON.parse(localStorage.getItem('quickNotePad'));
   const titleOfNote = document.getElementById('title-field').value;
   const newNotes = oldLocalStorageArray.filter(({ titleContent }) => titleContent !== titleOfNote);
-  localStorage.removeItem('quickNotePad');
   localStorage.setItem('quickNotePad', JSON.stringify(newNotes));
   updateNoteListButtons();
 };
