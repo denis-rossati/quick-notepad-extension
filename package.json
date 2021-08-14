@@ -1,0 +1,16 @@
+{
+  "name": "bloco_de_notas_extensao",
+  "version": "1.0.0",
+  "description": "A simple notepad for quick uses",
+  "main": "index.js",
+  "scripts": {
+    "test": "npm test"
+  },
+  "author": "Denis Rossati Ramos",
+  "license": "ISC",
+  "devDependencies": {
+    "eslint": "^7.32.0",
+    "eslint-config-airbnb-base": "^14.2.1",
+    "eslint-plugin-import": "^2.24.0"
+  }
+}
