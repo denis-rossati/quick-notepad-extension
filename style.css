@@ -1,0 +1,33 @@
+#notepad-area div {
+  width: 300px;
+  display: flex;
+  align-content: center;
+  justify-content: space-around;
+  margin: 5px;
+}
+
+#notepad-area div img {
+  height: 20px;
+}
+
+#notepad-area div button {
+  height: 30px;
+}
+
+#notepad-area div input {
+  height: 23px;
+}
+
+textarea {
+  resize: none;
+  min-width: 279px;
+}
+
+#notes-list {
+  margin-left: 13px;
+  max-width: 285px;
+}
+
+#notes-list button {
+  margin: 1px 2px;
+}

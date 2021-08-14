@@ -1,21 +1,22 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <title>Quick Notepad</title>
+  <head>
+    <title>Quick Notepad</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
   <main id="mother-of-all" >
     <article id="notepad-area" >
       <div>
         <label for="title-field">
-          <input type="text" name="note-title-input" id="title-field"></input>
+          <input placeholder="Note Title" type="text" name="note-title-input" id="title-field"></input>
         </label>
         <label for="save-button">
           <button type="submit" name="submit-note-button" id="save-button">Save</button>
         </label>
         <label for="remove-note">
           <button type="button" name="remove-note-button" id="remove-note">
-            <img src="./images/trash-can.png" alt="trash can icon - remove note" >
+            <img id="trash-can" src="./images/trash-can.png" alt="trash can icon - remove note" >
           </button>
         </label>
       </div>
