@@ -1,6 +1,15 @@
 const submitButton = document.getElementById('save-button');
 const deleteButton = document.getElementById('remove-note');
 
+const editContent = ({ target }) => {
+  const oldLocalStorageArray = JSON.parse(localStorage.getItem('quickNotePad'));
+  const resgatedInfo = oldLocalStorageArray.find(({ titleContent }) => titleContent === target.id);
+  const titleContent = document.getElementById('title-field');
+  const noteContent = document.getElementById('notes-input');
+  titleContent.value = resgatedInfo.titleContent;
+  noteContent.value = resgatedInfo.noteContent;
+};
+
 const reduceTitle = (string) => `${string.split('').slice(0, 10).join('')}...`;
 
 const updateNoteListButtons = () => {
@@ -12,6 +21,7 @@ const updateNoteListButtons = () => {
     const button = document.createElement('button');
     button.innerText = reducedTitle;
     button.id = titleContent;
+    button.addEventListener('click', editContent);
     notesList.appendChild(button);
   });
 };
