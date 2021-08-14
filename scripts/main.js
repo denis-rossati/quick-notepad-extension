@@ -85,6 +85,8 @@ const removeNote = () => {
   const newNotes = oldLocalStorageArray.filter(({ titleContent }) => titleContent !== titleOfNote);
   localStorage.setItem('quickNotePad', JSON.stringify(newNotes));
   updateNoteListButtons();
+  document.getElementById('title-field').value = '';
+  document.getElementById('notes-input').value = '';
 };
 
 window.onload = () => {
