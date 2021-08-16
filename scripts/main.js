@@ -1,5 +1,6 @@
 const submitButton = document.getElementById('save-button');
 const deleteButton = document.getElementById('remove-note');
+const textAreaInput = document.getElementById('notes-input');
 
 const editContent = ({ target }) => {
   const oldLocalStorageArray = JSON.parse(localStorage.getItem('quickNotePad'));
@@ -92,5 +93,6 @@ const removeNote = () => {
 window.onload = () => {
   submitButton.addEventListener('click', manageNote);
   deleteButton.addEventListener('click', removeNote);
+  textAreaInput.addEventListener('chage', manageNote);
   updateNoteListButtons();
 };
