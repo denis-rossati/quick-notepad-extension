@@ -1,6 +1,7 @@
 const submitButton = document.getElementById('save-button');
 const deleteButton = document.getElementById('remove-note');
 const textAreaInput = document.getElementById('notes-input');
+const 
 
 const editContent = ({ target }) => {
   const oldLocalStorageArray = JSON.parse(localStorage.getItem('quickNotePad'));
@@ -64,6 +65,7 @@ const setNoteInLocalStorage = (note) => {
 
 const manageNote = (evt) => {
   evt.preventDefault();
+  console.log('cchange')
   const titleContent = document.getElementById('title-field').value;
   const noteContent = document.getElementById('notes-input').value;
   const noteInfo = {
@@ -93,6 +95,6 @@ const removeNote = () => {
 window.onload = () => {
   submitButton.addEventListener('click', manageNote);
   deleteButton.addEventListener('click', removeNote);
-  textAreaInput.addEventListener('chage', manageNote);
+  textAreaInput.addEventListener('keyup', manageNote);
   updateNoteListButtons();
 };
