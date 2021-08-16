@@ -1,7 +1,6 @@
 const submitButton = document.getElementById('save-button');
 const deleteButton = document.getElementById('remove-note');
 const textAreaInput = document.getElementById('notes-input');
-const 
 
 const editContent = ({ target }) => {
   const oldLocalStorageArray = JSON.parse(localStorage.getItem('quickNotePad'));
