@@ -21,6 +21,7 @@
 textarea {
   resize: none;
   min-width: 279px;
+  min-height: 300px;
 }
 
 #notes-list {
